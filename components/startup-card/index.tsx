@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
 import { Author, Startup } from '@/sanity/sanity.types';
+import { Eye } from 'lucide-react';
+import { Button } from '../ui/button';
+import Link from 'next/link';
 
 export type StartupType = Omit<Startup, 'author'> & { author?: Author };
 
@@ -9,15 +12,17 @@ type Props = {
 };
 
 const StartUpCard = ({ startup }: Props) => {
-  const { title, category, description, views, image, author } = startup;
+  const { _id, title, category, description, views, image, author } = startup;
 
   return (
     <div className="startup-card">
       <div className="flex justify-between items-center">
         <div>{new Date().toLocaleDateString()}</div>
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center items-center gap-2">
           <div>{views}</div>
-          <div>e</div>
+          <div>
+            <Eye className="size-5" />
+          </div>
         </div>
       </div>
       <div className="mt-6">
@@ -46,7 +51,9 @@ const StartUpCard = ({ startup }: Props) => {
       <div className="flex items-center justify-between mt-5">
         <p className="text-16-medium">{category}</p>
 
-        <button className="startup-card_btn">Details</button>
+        <Button className="startup-card_btn" asChild>
+          <Link href={`/startups/${_id}`}>Details</Link>
+        </Button>
       </div>
     </div>
   );

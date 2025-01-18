@@ -2,15 +2,15 @@ import SearchInput from '@/components/search-input';
 import StartUpCard, { StartupType } from '@/components/startup-card';
 import { sanityFetch } from '@/sanity/lib/live';
 import { FETCH_STARTUPS_QUERY } from '@/sanity/lib/queries';
-import { Startup } from '@/sanity/sanity.types';
 import { SearchParams } from 'next/dist/server/request/search-params';
 import React from 'react';
 
 const HomePage = async ({ searchParams }: { searchParams: SearchParams }) => {
-  const query = await searchParams?.query;
+  const query = (await searchParams?.query) || null;
 
   const { data: startups = [] } = await sanityFetch({
     query: FETCH_STARTUPS_QUERY,
+    params: { search: query },
   });
 
   return (
@@ -32,11 +32,17 @@ const HomePage = async ({ searchParams }: { searchParams: SearchParams }) => {
           {query ? `Search results for '${query}'` : 'All Startups'}
         </h3>
 
-        <ul className="mt-7 card_grid">
-          {startups.map((startup: StartupType) => (
-            <StartUpCard startup={startup} />
-          ))}
-        </ul>
+        {startups.length ? (
+          <ul className="mt-7 card_grid">
+            {startups.map((startup: StartupType) => (
+              <StartUpCard startup={startup} />
+            ))}
+          </ul>
+        ) : (
+          <div className="no-result flex justify-center items-center py-10">
+            <p>Looks like there are no startups...</p>
+          </div>
+        )}
       </section>
     </>
   );
