@@ -18,20 +18,22 @@ export const FETCH_STARTUPS_QUERY =
   category,
   image,
 }`);
-// export const FETCH_STARTUPS_QUERY =
-//   defineQuery(`*[_type == "startup" && defined(slug.current) && !defined($search) || title match $search || category match $search || author -> name match $search] | order(_createdAt desc){
-//   title,
-//   slug,
-//   image,
-//   author -> {
-//     _id,
-//     name,
-//     image,
-//     username,
-//     bio
-//   },
-//   views,
-//   description,
-//   category,
-//   pitch
-// }`);
+
+export const FETCH_STARTUP_BY_ID_QUERY =
+  defineQuery(`*[_type == "startup" && _id == $id][0]{
+  title,
+  slug,
+  image,
+  author -> {
+    _id,
+    name,
+    image,
+    username,
+    bio
+  },
+  views,
+  description,
+  category,
+  pitch,
+  _createdAt
+}`);
