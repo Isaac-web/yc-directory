@@ -22,8 +22,6 @@ const ViewsCount = async ({ id }: Props) => {
       .commit();
   });
 
-  console.log(viewsCount);
-
   return (
     <div className="fixed bottom-10 right-5 py-3 px-5 bg-primary-100 rounded-lg text-16-normal flex items-center gap-3">
       <Eye /> <span>{viewsCount}</span>
