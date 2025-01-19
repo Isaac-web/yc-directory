@@ -1,9 +1,10 @@
 import { StartupType } from '@/components/startup-card';
 import { client } from '@/sanity/lib/client';
-import { FETCH_STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
+import { GET_STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Image from 'next/image';
-import React from 'react';
+import React, { Suspense } from 'react';
 import markdownIt from 'markdown-it';
+import ViewsCount from '@/components/views-count';
 
 const md = markdownIt();
 
@@ -14,21 +15,11 @@ const StartupDetailsPage = async ({
 }) => {
   const startupId = await params.id;
 
-  const startup = (await client.fetch(FETCH_STARTUP_BY_ID_QUERY, {
+  const startup = (await client.fetch(GET_STARTUP_BY_ID_QUERY, {
     id: startupId,
   })) as StartupType;
 
-  const {
-    _id,
-    _createdAt,
-    title,
-    author,
-    image,
-    pitch,
-    description,
-    category,
-    views,
-  } = startup;
+  const { _createdAt, title, author, image, pitch, description } = startup;
 
   const parsedContent = md.render(pitch || '');
 
@@ -74,6 +65,10 @@ const StartupDetailsPage = async ({
       </section>
 
       <hr className="divider w-full" />
+
+      <Suspense>
+        <ViewsCount id={startupId} />
+      </Suspense>
     </>
   );
 };

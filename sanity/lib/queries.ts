@@ -19,7 +19,7 @@ export const FETCH_STARTUPS_QUERY =
   image,
 }`);
 
-export const FETCH_STARTUP_BY_ID_QUERY =
+export const GET_STARTUP_BY_ID_QUERY =
   defineQuery(`*[_type == "startup" && _id == $id][0]{
   title,
   slug,
