@@ -37,3 +37,12 @@ export const GET_STARTUP_BY_ID_QUERY =
   pitch,
   _createdAt
 }`);
+
+export const GET_USER_BY_ID_QUERY =
+  defineQuery(`*[_type == "author" && _id == $id][0]{
+    _id,
+    name,
+    image,
+    username,
+    bio
+  }`);

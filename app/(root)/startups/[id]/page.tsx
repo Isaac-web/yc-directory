@@ -6,6 +6,8 @@ import React, { Suspense } from 'react';
 import markdownIt from 'markdown-it';
 import ViewsCount from '@/components/views-count';
 
+export const experimental = true;
+
 const md = markdownIt();
 
 const StartupDetailsPage = async ({
