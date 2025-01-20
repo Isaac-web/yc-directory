@@ -1,6 +1,7 @@
 import React from 'react';
 import ResetButton from './reset-button';
 import Form from 'next/form';
+import { Search } from 'lucide-react';
 
 type Props = {
   query?: string;
@@ -19,7 +20,7 @@ const SearchInput = ({ query }: Props) => {
         <div className="flex gap-2 items-center">
           {query && <ResetButton />}
           <button type="submit" className="search-btn text-white">
-            S
+            <Search />
           </button>
         </div>
       </Form>

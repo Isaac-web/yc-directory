@@ -1,16 +1,16 @@
 import { client } from '@/sanity/lib/client';
-import { FETCH_STARTUPS_QUERY } from '@/sanity/lib/queries';
+import { GET_STARTUP_BY_AUTHOR_QUERY } from '@/sanity/lib/queries';
 import React, { Suspense } from 'react';
 import StartUpCard from '../startup-card';
 import { StartupType } from '../startup-card';
 
-const UserStartups = async () => {
+const UserStartups = async ({ authorId }: { authorId: string }) => {
   const startups = await client
     .withConfig({ useCdn: false })
-    .fetch(FETCH_STARTUPS_QUERY, { search: null });
+    .fetch(GET_STARTUP_BY_AUTHOR_QUERY, { authorId });
 
   return (
-    <Suspense fallback={'Loading....'}>
+    <>
       {startups.length ? (
         startups.map((startup: StartupType) => (
           <li>
@@ -22,7 +22,7 @@ const UserStartups = async () => {
           <p className="no-result">No startups yet.</p>
         </div>
       )}
-    </Suspense>
+    </>
   );
 };
 

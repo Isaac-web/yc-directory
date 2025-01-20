@@ -1,6 +1,6 @@
 import SearchInput from '@/components/search-input';
 import StartUpCard, { StartupType } from '@/components/startup-card';
-import { sanityFetch } from '@/sanity/lib/live';
+import { sanityFetch, SanityLive } from '@/sanity/lib/live';
 import { FETCH_STARTUPS_QUERY } from '@/sanity/lib/queries';
 import { SearchParams } from 'next/dist/server/request/search-params';
 import React from 'react';
@@ -43,6 +43,7 @@ const HomePage = async ({ searchParams }: { searchParams: SearchParams }) => {
             <p>Looks like there are no startups...</p>
           </div>
         )}
+        <SanityLive />
       </section>
     </>
   );

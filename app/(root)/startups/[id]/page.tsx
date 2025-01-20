@@ -5,6 +5,8 @@ import Image from 'next/image';
 import React, { Suspense } from 'react';
 import markdownIt from 'markdown-it';
 import ViewsCount from '@/components/views-count';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 export const experimental = true;
 
@@ -20,6 +22,8 @@ const StartupDetailsPage = async ({
   const startup = (await client.fetch(GET_STARTUP_BY_ID_QUERY, {
     id: startupId,
   })) as StartupType;
+
+  if (!startup) return notFound();
 
   const { _createdAt, title, author, image, pitch, description } = startup;
 
@@ -44,19 +48,23 @@ const StartupDetailsPage = async ({
       </section>
 
       <section className="w-11/12 md:w-7/12 max-w-[70em] mx-auto mb-10">
-        <div className="flex gap-5 items-center mb-10">
-          <Image
-            src={author?.image as string}
-            height={65}
-            width={65}
-            alt={author?.name as string}
-            className="rounded-full bg-gray-50 shadow-md"
-          />
-          <div className="flex flex-col">
-            <p className="text-20-medium">{author?.name}</p>
-            <p className="text-16-medium !text-black-300">{author?.username}</p>
+        <Link href={`/users/${author?._id}`}>
+          <div className="flex gap-5 items-center mb-10">
+            <Image
+              src={author?.image as string}
+              height={65}
+              width={65}
+              alt={author?.name as string}
+              className="rounded-full bg-gray-50 shadow-md"
+            />
+            <div className="flex flex-col">
+              <p className="text-20-medium">{author?.name}</p>
+              <p className="text-16-medium !text-black-300">
+                {author?.username}
+              </p>
+            </div>
           </div>
-        </div>
+        </Link>
 
         {parsedContent && (
           <article

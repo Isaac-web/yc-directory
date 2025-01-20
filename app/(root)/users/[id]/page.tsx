@@ -1,11 +1,9 @@
 import { auth } from '@/auth';
-import StartUpCard, { StartupType } from '@/components/startup-card';
+import { Skeleton } from '@/components/ui/skeleton';
 import UserStartups from '@/components/user-startups';
+import { cn } from '@/lib/utils';
 import { client } from '@/sanity/lib/client';
-import {
-  FETCH_STARTUPS_QUERY,
-  GET_USER_BY_ID_QUERY,
-} from '@/sanity/lib/queries';
+import { GET_USER_BY_ID_QUERY } from '@/sanity/lib/queries';
 import { Author } from '@/sanity/sanity.types';
 import Image from 'next/image';
 import React, { Suspense } from 'react';
@@ -26,8 +24,6 @@ const UserDetailsPage = async ({
       id: userId,
     }
   )) as Author;
-
-  const startups = await client.fetch(FETCH_STARTUPS_QUERY, { search: null });
 
   return (
     <>
@@ -57,11 +53,20 @@ const UserDetailsPage = async ({
 
         <div className="flex-1 flex flex-col gap-5 lg:-mt-5">
           <h3 className="text-30-bold">
-            {session?.id === userId ? 'Your' : 'All'} startups
+            {session?.id === userId ? 'Your' : `${name}'s`} startups
           </h3>
 
           <ul className="card_grid-sm">
-            <UserStartups />
+            <Suspense
+              fallback={[1, 2, 3, 4, 5].map((value) => (
+                <Skeleton
+                  key={cn('skeleton', value)}
+                  className="startup-card_skeleton"
+                />
+              ))}
+            >
+              <UserStartups authorId={userId} />
+            </Suspense>
           </ul>
         </div>
       </section>

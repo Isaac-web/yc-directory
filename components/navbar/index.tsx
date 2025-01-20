@@ -28,7 +28,9 @@ const Navbar = async () => {
           ) : (
             <div className="flex items-center gap-5">
               <div>
-                <button>Create</button>
+                <Link href={'/startups/create'}>
+                  <button>Create</button>
+                </Link>
               </div>
 
               <form

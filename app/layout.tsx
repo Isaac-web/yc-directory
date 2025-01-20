@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import 'easymde/dist/easymde.min.css';
+import { Toaster } from '@/components/ui/toaster';
+import NextTopLoader from 'nextjs-toploader';
 
 export const metadata: Metadata = {
   title: 'YC Directory',
@@ -66,7 +68,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${workSans.variable} antialiased`}>{children}</body>
+      <body className={`${workSans.variable} antialiased`}>
+        <NextTopLoader color="#EE2B69" />
+        <main>{children}</main>
+        <Toaster />
+      </body>
     </html>
   );
 }
