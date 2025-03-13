@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# YC Directory Clone
 
-## Getting Started
+A modern web application built with Next.js that serves as a directory for YCombinator startups. This platform allows users to discover, share, and interact with YC-backed companies.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Real-time Updates**: Built with Next.js 14 and Server Components
+- **Authentication**: Secure user authentication system
+- **Content Management**: Powered by Sanity.io headless CMS
+- **Responsive Design**: Mobile-first approach using Tailwind CSS
+- **Modern UI Components**: Using shadcn/ui components
+- **TypeScript Support**: Full type safety across the application
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Next.js 14, React 19
+- **Styling**: Tailwind CSS
+- **CMS**: Sanity.io
+- **Authentication**: NextAuth.js
+- **Type Safety**: TypeScript
+- **UI Components**: shadcn/ui, Radix UI
+- **Markdown Support**: Markdown-it
+
+## 🚦 Getting Started
+
+### Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- Yarn package manager
+- Sanity.io account
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_sanity_project_id
+NEXT_PUBLIC_SANITY_DATASET=your_sanity_dataset
+NEXT_PUBLIC_SANITY_API_VERSION=your_api_version
+SANITY_WRITE_TOKEN=your_sanity_write_token
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+git clone https://github.com/yourusername/yc-directory.git
+cd yc-directory
+```
 
-## Learn More
+2. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Start the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+yarn dev
+```
 
-## Deploy on Vercel
+4. Open http://localhost:3000 with your browser to see the result.:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. For Sanity Studio:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+	yarn sanity dev
+```
+
+## Project Structure
+
+├── app/ # Next.js app directory
+│ ├── (root)/ # Root layout and pages
+│ ├── api/ # API routes
+│ ├── studio/ # Sanity Studio integration
+│ └── globals.css # Global styles
+├── components/ # React components
+│ ├── navbar/ # Navigation components
+│ ├── startup-card/ # Startup display components
+│ ├── startup-form/ # Startup creation/editing forms
+│ ├── ui/ # Reusable UI components
+│ └── user-startups/ # User-specific startup components
+├── hooks/ # Custom React hooks
+├── lib/ # Utility functions
+│ ├── actions.ts # Server actions
+│ ├── utils.ts # Helper functions
+│ └── validator.ts # Form validation
+├── public/ # Static assets
+├── sanity/ # Sanity configuration
+│ ├── lib/ # Sanity utility functions
+│ ├── schemas/ # Content schemas
+│ └── env.ts # Environment configuration
+├── tailwind.config.ts # Tailwind CSS configuration
+└── next.config.ts # Next.js configuration
+
+## 🔧 Configuration
+
+### Tailwind CSS
+
+The project uses a custom Tailwind configuration with:
+
+- Custom color schemes
+- Extended screen sizes
+- Custom shadows
+- Typography plugin
+- Animation support
+
+### Sanity Studio
+
+Integrated Sanity Studio with:
+
+- Custom document types for Authors and Startups
+- Live preview capabilities
+- Custom structure configuration
+
+## 🚀 Deployment
+
+The application is optimized for deployment on Vercel:
+
+1. Push your code to GitHub
+2. Import your repository to Vercel
+3. Add your environment variables
+4. Deploy!
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch ( git checkout -b feature/AmazingFeature )
+3. Commit your changes ( git commit -m 'Add some AmazingFeature' )
+4. Push to the branch ( git push origin feature/AmazingFeature )
+5. Open a Pull Request
