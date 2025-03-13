@@ -1,5 +1,8 @@
 # YC Directory Clone
 
+![image](https://github.com/user-attachments/assets/743416c0-6dfd-46b4-9d20-663d3f85c70e)
+
+
 A modern web application built with Next.js that serves as a directory for YCombinator startups. This platform allows users to discover, share, and interact with YC-backed companies.
 
 ## 🚀 Features
